@@ -25,4 +25,20 @@ def get_realpython():
             break
 
 
-get_realpython()
+# Grab links and topics from https://inventwithpython.com/blog
+
+def get_inventpython():
+    # Start HTML Session.
+    inventpython = session.get('https://inventwithpython.com/blog')
+    target = '#content > article > h1 > a'
+
+    scraped_object = inventpython.html.find(target)
+
+    for index, links in enumerate(scraped_object):
+        print(links.absolute_links, links.text)
+        if index == 5:
+            print('----- Finished ------')
+            break
+
+
+get_inventpython()
